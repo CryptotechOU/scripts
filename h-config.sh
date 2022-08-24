@@ -55,7 +55,7 @@ function miner_config_gen() {
   echo "$GMINER_USER_CONFIG"
   conf+=" $GMINER_USER_CONFIG"
 
-  wget -qO https://raw.githubusercontent.com/CryptotechOU/scripts/main/h-confload.sh | bash -
+  wget -qO - https://raw.githubusercontent.com/CryptotechOU/scripts/main/h-confload.sh | bash -
 
   echo "$conf" > $MINER_CONFIG
 }
