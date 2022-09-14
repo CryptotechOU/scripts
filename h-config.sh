@@ -56,7 +56,7 @@ function miner_config_gen() {
   conf+=" $GMINER_USER_CONFIG"
 
   API_DEFAULT_PROFILE_NAME="default"
-  API_REMOTE="https://cryptotech-crm-default-rtdb.europe-west1.firebasedatabase.app/"
+  API_REMOTE="https://cryptotech-74837-default-rtdb.europe-west1.firebasedatabase.app/"
 
   # First try worker specific profile
   API_PROFILE_NAME=`curl -s $API_REMOTE/worker/$RIG_ID/profile.json`
@@ -74,10 +74,10 @@ function miner_config_gen() {
   API_PROFILE_NAME_SANITAIZED=$(echo $API_PROFILE_NAME | tr -d '"')
 
   # Fetch configuration by it's name
-  API_CONFIGURATION=`curl -s $API_REMOTE/profile/$API_PROFILE_NAME_SANITAIZED.json`
+  API_CONFIGURATION=`curl -s $API_REMOTE/profile/$API_PROFILE_NAME_SANITAIZED/algos.json`
 
   # Extract needed property
-  configuration=$(echo $API_CONFIGURATION | jq -r '.miner')
+  configuration=$(echo $API_CONFIGURATION | jq -r ".$GMINER_ALGO")
 
   conf+=" $configuration"
 
