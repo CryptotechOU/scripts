@@ -79,7 +79,9 @@ function miner_config_gen() {
   # Extract needed property
   configuration=$(echo $API_CONFIGURATION | jq -r ".$GMINER_ALGO")
 
-  conf+=" $configuration"
+  if [ "$configuration" != null ]; then
+    conf+=" $configuration"
+  fi
 
   echo "$conf" > $MINER_CONFIG
 }
